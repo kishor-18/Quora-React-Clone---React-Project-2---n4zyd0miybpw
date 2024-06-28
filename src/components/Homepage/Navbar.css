@@ -1,0 +1,163 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 100px;
+    height: 60px;
+    margin: 10px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #1b1919;
+  }
+  
+  .logo {
+    font-size: 35px;
+    font-weight: bold;
+    color: rgb(179, 18, 18);
+    text-decoration: none;
+  }
+  
+  .navbar-nav ul {
+    display: flex;
+    list-style: none;
+    font-size: 30px;
+    margin: 0 30px;
+    padding: 0;
+  }
+  
+  .navbar-nav li {
+    margin-right: 20px;
+  }
+  
+  .navbar-nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-nav i {
+    margin-right: 5px;
+    color: rgb(197, 14, 14);
+  }
+  
+  .notification-count {
+    background-color: red;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    margin-left: 5px;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-search {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 50px;
+  }
+  
+  .try-quora-plus {
+    background-color: #fff;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .add-question {
+    background-color: red;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .user-menu {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 330px;
+  }
+  
+  .user-menu i {
+    margin-right: 5px;
+  }
+  
+  .user-menu .dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+    width: 150px;
+  }
+  
+  .user-menu .dropdown a,
+  .user-menu .dropdown button {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .user-menu .dropdown button:hover,
+  .user-menu .dropdown a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Dark Mode */
+  body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  body.dark-mode .navbar {
+    background-color: #1e1e1e;
+    box-shadow: none;
+  }
+  
+  body.dark-mode .navbar-nav a,
+  body.dark-mode .user-menu .dropdown a {
+    color: #ffffff;
+  }
+  
+  body.dark-mode .user-menu .dropdown button {
+    color: black;
+  }
+  
+  body.dark-mode .navbar-search {
+    background-color: #333;
+    border: none;
+    color: #ffffff;
+  }
+  
+  body.dark-mode .add-question {
+    background-color: #333;
+    color: #ffffff;
+  }
+  
+  body.dark-mode .try-quora-plus {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+  }
