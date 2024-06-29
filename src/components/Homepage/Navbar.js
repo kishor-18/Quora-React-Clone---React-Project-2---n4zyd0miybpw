@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './Navbar.css';
+import Question from './Question';
+import Posts from './Posts';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const navbar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,12 +23,13 @@ const Navbar = () => {
     document.body.classList.toggle('dark-mode');
   };
 
-  return (
+  return (<>
+  <div>
     <div className="navbar">
       <a href="/" className="logo">Quora</a>
       <nav className="navbar-nav">
         <ul>
-          <li><a href="/navbar" ><i className="fa-solid fa-house"></i></a></li>
+          <li><a href="/home"><i className="fa-solid fa-house"></i></a></li>
           <li><a href="/following"><i className="fa-solid fa-question"></i></a></li>
           <li><a href="/answers"><i className="fa-solid fa-pen-to-square"></i></a></li>
           <li><a href="/spaces"><i className="fa-solid fa-user-group"></i></a></li>
@@ -56,7 +59,10 @@ const Navbar = () => {
         <button className="add-question">Add question</button>
       </div>
     </div>
-  );
+    < Question />
+    < Posts />
+    </div>
+    </>);
 };
 
-export default Navbar;
+export default navbar;
