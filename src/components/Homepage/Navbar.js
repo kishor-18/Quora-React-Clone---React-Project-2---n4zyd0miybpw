@@ -60,7 +60,7 @@ const navbar = () => {
       </div>
     </div>
     < Question />
-    < Posts />
+    {/* < Posts /> */}
     </div>
     </>);
 };

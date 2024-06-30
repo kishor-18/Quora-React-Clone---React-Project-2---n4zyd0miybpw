@@ -26,7 +26,12 @@
     width: 100%;
     align-items: center;
 }
-
+.posts-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
 .posts-content {
     width: 50%;
     margin: 10px 0;
