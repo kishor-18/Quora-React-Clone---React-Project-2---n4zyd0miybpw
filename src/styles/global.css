@@ -1,0 +1,63 @@
+/* Default Light Mode */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    color: #333333;
+  }
+  
+  /* Dark Mode */
+  body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  /* Navbar Styles */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 100px;
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar.dark-mode {
+    background-color: #1e1e1e;
+    box-shadow: none;
+  }
+  
+  .navbar a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .navbar a.dark-mode {
+    color: #ffffff;
+  }
+  
+  /* Additional Styles for Components */
+  .advertisement {
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .advertisement.dark-mode {
+    border-color: #444;
+  }
+  
+  .posts-card {
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .posts-card.dark-mode {
+    border-color: #444;
+  }
+  
+  /* Add other component styles here */
+  

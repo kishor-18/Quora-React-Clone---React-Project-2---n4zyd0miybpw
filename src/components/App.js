@@ -1,28 +1,25 @@
-import React from "react";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Homepage/Navbar";
 import Login from "./LoginPage/Login";
 import ProfileSettings from "./LoginPage/ProfileSettings";
-import Question from "./Homepage/Question";
+import Sidebar from "./Homepage/Sidebar";
 import Posts from "./Homepage/Posts";
+import Question from "./Homepage/Question";
+import Ad from "./Homepage/Ad";
+import './App.css';
 
 function App() {
-  const samplePost = {
-    _id: "1",
-    title: "Sample Question",
-    content: "This is a sample question.",
-    author: "John Doe",
-    timestamp: new Date().toISOString()
-  };
-
   return (
     <Router>
-      <Navbar />
+      <div className="container">
+        <Navbar />
+        <Sidebar />
+        <Question />
+        <Posts />
+        <Ad />
+      </div>
       <Routes>
-        <Route path="/" element={<Posts />} />
-        <Route path="/" element={<Question />} />
-        <Route path="/home" element={<Posts />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile-settings" element={<ProfileSettings />} />
       </Routes>

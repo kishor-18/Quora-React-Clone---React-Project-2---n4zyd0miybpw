@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './Navbar.css';
-import Question from './Question';
-import Posts from './Posts';
 import { useNavigate } from 'react-router-dom';
 
-const navbar = () => {
+const Navbar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -19,13 +18,13 @@ const navbar = () => {
     navigate('/login');
   };
 
-  const toggleDarkMode = () => {
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
     document.body.classList.toggle('dark-mode');
   };
 
-  return (<>
-  <div>
-    <div className="navbar">
+  return (
+    <div className={`navbar ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <a href="/" className="logo">Quora</a>
       <nav className="navbar-nav">
         <ul>
@@ -40,7 +39,7 @@ const navbar = () => {
         <i className="fa-solid fa-magnifying-glass"></i>
         <input className="navbar-search" type="text" placeholder="Search Quora" />
         <div className="user-menu" onClick={toggleDropdown}>
-          <i className="fa-solid fa-user"></i> <span></span>
+          <i className="fa-solid fa-user"></i>
           {isDropdownOpen && (
             <div className="dropdown">
               {isLoggedIn ? (
@@ -51,7 +50,7 @@ const navbar = () => {
               ) : (
                 <a href="/login">Login</a>
               )}
-              <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
+              <button onClick={toggleTheme}>Toggle Dark Mode</button>
             </div>
           )}
         </div>
@@ -59,10 +58,7 @@ const navbar = () => {
         <button className="add-question">Add question</button>
       </div>
     </div>
-    < Question />
-    {/* < Posts /> */}
-    </div>
-    </>);
+  );
 };
 
-export default navbar;
+export default Navbar;

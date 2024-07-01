@@ -4,18 +4,13 @@ import './Sidebar.css';
 const Sidebar = () => {
   return (
     <div className="sidebar">
-      <h3>Topics</h3>
+      <h3>+ Create Space</h3>
       <ul>
-        <li><a href="/">Topic 1</a></li>
-        <li><a href="/">Topic 2</a></li>
-        <li><a href="/">Topic 3</a></li>
-        <li><a href="/">Topic 4</a></li>
+        <li><a href="/">Food Therapy </a></li>
+        <li><a href="/">Entrepreneurship Ideas </a></li>
+        <li><a href="/">Business Ideas </a></li>
+        <li><a href="/">Trending on social media </a></li>
       </ul>
-      <div className="ad-section">
-        <h4>Advertisement</h4>
-        <img src="/images/ad.png" alt="Ad" />
-        <p>Ad description goes here.</p>
-      </div>
     </div>
   );
 };

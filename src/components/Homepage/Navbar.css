@@ -3,10 +3,10 @@
     align-items: center;
     padding: 10px 100px;
     height: 60px;
-    margin: 10px 40px;
+    margin: 0 40px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border: 1px solid #1b1919;
+    /* border: 1px solid #1b1919; */
   }
   
   .logo {
@@ -53,6 +53,7 @@
   .navbar-right {
     display: flex;
     align-items: center;
+    position: relative;
   }
   
   .navbar-search {
@@ -124,40 +125,79 @@
   .user-menu .dropdown a:hover {
     background-color: #f0f0f0;
   }
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .navbar {
+  background-color: #1e1e1e;
+  box-shadow: none;
+}
+
+body.dark-mode .navbar-nav a,
+body.dark-mode .user-menu .dropdown a {
+  color: #ffffff;
+}
+
+body.dark-mode .user-menu .dropdown button {
+  color: #ffffff;
+}
+
+body.dark-mode .navbar-search {
+  background-color: #333;
+  border: none;
+  color: #ffffff;
+}
+
+body.dark-mode .add-question {
+  background-color: #333;
+  color: #ffffff;
+}
+
+body.dark-mode .try-quora-plus {
+  background-color: #333;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+/* Light Mode */
+body.light-mode {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+body.light-mode .navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .navbar-nav a,
+body.light-mode .user-menu .dropdown a {
+  color: #333333;
+}
+
+body.light-mode .user-menu .dropdown button {
+  color: #333333;
+}
+
+body.light-mode .navbar-search {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  color: #333333;
+}
+
+body.light-mode .add-question {
+  background-color: red;
+  color: #ffffff;
+}
+
+body.light-mode .try-quora-plus {
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #ccc;
+}
+
   
-  /* Dark Mode */
-  body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-  }
-  
-  body.dark-mode .navbar {
-    background-color: #1e1e1e;
-    box-shadow: none;
-  }
-  
-  body.dark-mode .navbar-nav a,
-  body.dark-mode .user-menu .dropdown a {
-    color: #ffffff;
-  }
-  
-  body.dark-mode .user-menu .dropdown button {
-    color: black;
-  }
-  
-  body.dark-mode .navbar-search {
-    background-color: #333;
-    border: none;
-    color: #ffffff;
-  }
-  
-  body.dark-mode .add-question {
-    background-color: #333;
-    color: #ffffff;
-  }
-  
-  body.dark-mode .try-quora-plus {
-    background-color: #333;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-  }
