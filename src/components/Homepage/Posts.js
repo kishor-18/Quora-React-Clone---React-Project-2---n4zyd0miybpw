@@ -4,7 +4,7 @@ import { FaRegComment } from "react-icons/fa";
 import { GrPowerCycle } from "react-icons/gr";
 import './Posts.css';
 
-const Posts = () => {
+const Posts = ({ user, setUser }) => {
   const [posts, setPosts] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [commentText, setCommentText] = useState("");
@@ -42,6 +42,10 @@ const Posts = () => {
   };
 
   const handleUpvote = (id) => {
+    if (!user.isLoggedIn) {
+      alert('Please log in to upvote');
+      return;
+    }
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
         post._id === id
@@ -58,6 +62,10 @@ const Posts = () => {
   };
 
   const handleDownvote = (id) => {
+    if (!user.isLoggedIn) {
+      alert('Please log in to downvote');
+      return;
+    }
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
         post._id === id
@@ -74,6 +82,10 @@ const Posts = () => {
   };
 
   const handleCommentSubmit = (postId) => {
+    if (!user.isLoggedIn) {
+      alert('Please log in to comment');
+      return;
+    }
     const newComment = {
       id: Date.now(),
       text: commentText,
@@ -90,6 +102,10 @@ const Posts = () => {
   };
 
   const handleReplySubmit = (postId, commentId, replyText) => {
+    if (!user.isLoggedIn) {
+      alert('Please log in to reply');
+      return;
+    }
     const newReply = {
       id: Date.now(),
       text: replyText,
@@ -112,6 +128,10 @@ const Posts = () => {
   };
 
   const handleDeleteComment = (postId, commentId) => {
+    if (!user.isLoggedIn) {
+      alert('Please log in to delete comment');
+      return;
+    }
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
         post._id === postId
@@ -125,6 +145,10 @@ const Posts = () => {
   };
 
   const handleDeleteReply = (postId, commentId, replyId) => {
+    if (!user.isLoggedIn) {
+      alert('Please log in to delete reply');
+      return;
+    }
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
         post._id === postId
@@ -149,9 +173,13 @@ const Posts = () => {
       {posts.map((post) => (
         <div className="posts-card" key={post._id}>
           <div className="posts-header">
-            <img src={post.author.profileImage}/>          
+          {post.author.profileImage ? (
+                <img src={post.author.profileImage} alt="Profile" />
+            ) : (
+                <i className="fa-solid fa-user"></i>
+            )} 
             <span>{post.author.name}</span>
-            <span className="follow"><a>·Follow</a></span>
+            <span className="follow"><a href="#">·Follow</a></span>
             <p className="posts-date">{new Date(post.createdAt).toLocaleString()}</p>
           </div>
           <div className="posts-content">
@@ -159,7 +187,7 @@ const Posts = () => {
             {post.isVisible && (
               <>
                 <p>{post.content}</p>
-                {post.images && <img src={post.images} />}
+                {post.images && <img src={post.images} alt="post content"/>}
               </>
             )}
           </div>
@@ -171,10 +199,10 @@ const Posts = () => {
               <button className="downvote" onClick={() => handleDownvote(post._id)}>
                 <PiArrowFatDownThin /> {post.dislikeCount || 0} Downvote
               </button>
-              <button>
+              <button onClick={() => alert('Please log in to comment')}>
                 <FaRegComment /> {post.comments?.length || 0} Comment
               </button>
-              <button><GrPowerCycle /> Share</button>
+              <button onClick={() => alert('Please log in to share')}><GrPowerCycle /> Share</button>
             </div>
             <i className="fa-solid fa-ellipsis"></i>
           </div>
@@ -198,7 +226,7 @@ const Posts = () => {
                       <div key={reply.id} className="reply">
                         <p>{reply.text}</p>
                         <button className="delete-button" onClick={() => handleDeleteReply(post._id, comment.id, reply.id)}>Delete</button>
-                      </div>  
+                      </div>
                     ))}
                     <input
                       type="text"

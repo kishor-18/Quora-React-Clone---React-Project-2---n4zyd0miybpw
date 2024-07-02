@@ -1,26 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./Homepage/Navbar";
-import Login from "./LoginPage/Login";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Homepage from './Homepage/Homepage';
+import Login from './LoginPage/Login';
 import ProfileSettings from "./LoginPage/ProfileSettings";
-import Sidebar from "./Homepage/Sidebar";
-import Posts from "./Homepage/Posts";
-import Question from "./Homepage/Question";
-import Ad from "./Homepage/Ad";
-import './App.css';
+import Signup from './LoginPage/Signup';
 
 function App() {
+  const [user, setUser] = useState({ isLoggedIn: false, email: '', firstName: '' });
+
   return (
     <Router>
-      <div className="container">
-        <Navbar />
-        <Sidebar />
-        <Question />
-        <Posts />
-        <Ad />
-      </div>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Homepage user={user} setUser={setUser} />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/signup" element={<Signup setUser={setUser} />} />
         <Route path="/profile-settings" element={<ProfileSettings />} />
       </Routes>
     </Router>

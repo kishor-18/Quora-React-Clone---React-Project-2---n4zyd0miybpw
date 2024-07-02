@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './Navbar.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ user, setUser }) => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const toggleLogin = () => {
-    setIsLoggedIn(!isLoggedIn);
-    navigate('/login');
+  const handleLogoutClick = () => {
+    setUser({ isLoggedIn: false, email: '', firstName: '' });
+    navigate('/');
+  };
+
+  const handleProfileSettingsClick = () => {
+    navigate('/profile-settings');
   };
 
   const toggleTheme = () => {
@@ -25,14 +28,14 @@ const Navbar = () => {
 
   return (
     <div className={`navbar ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
-      <a href="/" className="logo">Quora</a>
+      <Link to="/" className="logo">Quora</Link>
       <nav className="navbar-nav">
         <ul>
-          <li><a href="/home"><i className="fa-solid fa-house"></i></a></li>
-          <li><a href="/following"><i className="fa-solid fa-question"></i></a></li>
-          <li><a href="/answers"><i className="fa-solid fa-pen-to-square"></i></a></li>
-          <li><a href="/spaces"><i className="fa-solid fa-user-group"></i></a></li>
-          <li><a href="/notifications"><i className="fa-solid fa-bell"></i></a></li>
+          <li><Link to="/home"><i className="fa-solid fa-house"></i></Link></li>
+          <li><Link to="/following"><i className="fa-solid fa-user-friends"></i></Link></li>
+          <li><Link to="/answers"><i className="fa-solid fa-pen-to-square"></i></Link></li>
+          <li><Link to="/spaces"><i className="fa-solid fa-user-group"></i></Link></li>
+          <li><Link to="/notifications"><i className="fa-solid fa-bell"></i></Link></li>
         </ul>
       </nav>
       <div className="navbar-right">
@@ -42,13 +45,14 @@ const Navbar = () => {
           <i className="fa-solid fa-user"></i>
           {isDropdownOpen && (
             <div className="dropdown">
-              {isLoggedIn ? (
+              {user.isLoggedIn ? (
                 <>
-                  <a href="/profile-settings">Profile Settings</a>
-                  <button onClick={toggleLogin}>Logout</button>
+                  <p>Hello, {user.firstName}</p>
+                  <button onClick={handleProfileSettingsClick}>Profile Settings</button>
+                  <button onClick={handleLogoutClick}>Logout</button>
                 </>
               ) : (
-                <a href="/login">Login</a>
+                <button onClick={() => navigate('/login')}>Login</button>
               )}
               <button onClick={toggleTheme}>Toggle Dark Mode</button>
             </div>
