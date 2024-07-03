@@ -1,17 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import './Addpost.css';
 
-ReactModal.setAppElement('#root'); // Call this once in your main App component or index.js
-
-const AddPost = ({ isOpen, onRequestClose }) => {
+const AddPost = ({ isOpen, onRequestClose, postId, currentTitle, currentContent, currentImage, fetchPosts }) => {
+  const [isModalOpen, setIsModalOpen] = useState(isOpen);
   const [activeTab, setActiveTab] = useState('question');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
 
-  const handleSubmit = () => {
-    const url = 'https://academics.newtonschool.co/api/v1/quora/post/';
+  useEffect(() => {
+    if (postId) {
+      setTitle(currentTitle || '');
+      setContent(currentContent || '');
+      setImage(currentImage || null);
+    } else {
+      setTitle('');
+      setContent('');
+      setImage(null);
+    }
+  }, [postId, currentTitle, currentContent, currentImage, fetchPosts]);
+
+  
+
+  const handleSubmit = async () => {
+    const url = postId ? `https://academics.newtonschool.co/api/v1/quora/post/${postId}` : 'https://academics.newtonschool.co/api/v1/quora/post/';
+    const method = postId ? 'PATCH' : 'POST';
 
     const formData = new FormData();
     formData.append('title', title);
@@ -20,43 +34,45 @@ const AddPost = ({ isOpen, onRequestClose }) => {
       formData.append('image', image);
     }
 
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJmMDllOTVlMzg5ZmIxMjM1ZGMyZCIsImlhdCI6MTcxOTk5MTA1MCwiZXhwIjoxNzUxNTI3MDUwfQ.uJcBDToCRYd34LZ2ouRD_p539HNXbdyCnxakRhL6POw',
-        'projectID': 'vmyitayk3fnu',
-      },
-      body: formData
-    }).then(response => {
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJmMDllOTVlMzg5ZmIxMjM1ZGMyZCIsImlhdCI6MTcxOTk5MTA1MCwiZXhwIjoxNzUxNTI3MDUwfQ.uJcBDToCRYd34LZ2ouRD_p539HNXbdyCnxakRhL6POw',
+          'projectID': 'vmyitayk3fnu'
+        },
+        body: formData
+      });
+
       if (response.ok) {
-        // Successfully created
+        console.log('Post ' + (postId ? 'updated' : 'created') + ' successfully');
+        // fetchPosts(); 
         onRequestClose();
       } else {
-        response.json().then(data => {
-          console.error('Error:', data);
-        });
+        const data = await response.json();
+        console.error('Error:', data);
       }
-    }).catch(error => {
+    } catch (error) {
       console.error('Error:', error);
-    });
+    }
   };
 
   return (
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      contentLabel="Add Question"
+      contentLabel={postId ? "Edit Post" : "Create Post"}
       className="modal"
       overlayClassName="overlay"
     >
       <div className="modal-header">
-        <button 
+        <button
           className={`tab-button ${activeTab === 'question' ? 'active' : ''}`}
           onClick={() => setActiveTab('question')}
         >
           Add Question
         </button>
-        <button 
+        <button
           className={`tab-button ${activeTab === 'post' ? 'active' : ''}`}
           onClick={() => setActiveTab('post')}
         >

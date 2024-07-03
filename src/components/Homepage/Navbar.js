@@ -32,6 +32,21 @@ const Navbar = ({ user, setUser }) => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const handleTryQuoraPlusClick = () => {
+    if (!user.isLoggedIn) {
+      alert('Please log in to use try Quora+');
+      return;
+    }
+  };
+
+  const handleAddQuestionClick = () => {
+    if (!user.isLoggedIn) {
+      alert('Please log in to add a question');
+      return;
+    }
+    toggleModal();
+  };
+
   return (
     <div className={`navbar ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <Link to="/" className="logo">Quora</Link>
@@ -64,8 +79,8 @@ const Navbar = ({ user, setUser }) => {
             </div>
           )}
         </div>
-        <button className="try-quora-plus">Try Quora+</button>
-        <button className="add-question" onClick={toggleModal}>Add question</button>
+        <button className="try-quora-plus" onClick={handleTryQuoraPlusClick}>Try Quora+</button>
+        <button className="add-question" onClick={handleAddQuestionClick}>Add question</button>
       </div>
       {isModalOpen && <AddPost isOpen={isModalOpen} onRequestClose={toggleModal} />}
     </div>

@@ -3,27 +3,77 @@ import { PiArrowFatUp, PiArrowFatDownThin } from "react-icons/pi";
 import { FaRegComment } from "react-icons/fa";
 import { GrPowerCycle } from "react-icons/gr";
 import './Posts.css';
+import AddPost from './Addpost';
 
-const Posts = ({ user, setUser }) => {
+const Posts = ({ user }) => {
   const [posts, setPosts] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [commentText, setCommentText] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(null);
 
   const header = {
-    projectID: "vmyitayk3fnu"
-  };
-
-  const options = {
-    method: 'GET',
-    headers: header
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJmMDllOTVlMzg5ZmIxMjM1ZGMyZCIsImlhdCI6MTcxOTk5MTA1MCwiZXhwIjoxNzUxNTI3MDUwfQ.uJcBDToCRYd34LZ2ouRD_p539HNXbdyCnxakRhL6POw',
+    'projectID': 'vmyitayk3fnu',
+    'Content-Type': 'application/json'
   };
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch(`https://academics.newtonschool.co/api/v1/quora/post?limit=10&page=${pageNumber}`, options);
+      const response = await fetch(`https://academics.newtonschool.co/api/v1/quora/post?limit=10&page=${pageNumber}`, {
+        method: 'GET',
+        headers: header
+      });
       const data = await response.json();
       setPosts(data.data);
-      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const updatePost = async (id, title, content, images) => {
+    try {
+      const url = `https://academics.newtonschool.co/api/v1/quora/post/${id}`;
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('content', content);
+      if (images) {
+        formData.append('image', images);
+      }
+  
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: header,
+        body: formData
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        setPosts(prevPosts =>
+          prevPosts.map(post =>
+            post._id === id ? { ...post, title, content, images: data.data.images } : post
+          )
+        );
+      } else {
+        console.error('Error updating post:', data); // Log server response for detailed error
+      }
+    } catch (error) {
+      console.error('Error updating post:', error); // Catch any other errors in the request process
+    }
+  };
+
+  const deletePost = async (id) => {
+    try {
+      const response = await fetch(`https://academics.newtonschool.co/api/v1/quora/post/${id}`, {
+        method: 'DELETE',
+        headers: header
+      });
+      if (response.ok) {
+        setPosts(prevPosts => prevPosts.filter(post => post._id !== id));
+      } else {
+        const data = await response.json();
+        console.error('Error deleting post:', data);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -102,10 +152,6 @@ const Posts = ({ user, setUser }) => {
   };
 
   const handleReplySubmit = (postId, commentId, replyText) => {
-    if (!user.isLoggedIn) {
-      alert('Please log in to reply');
-      return;
-    }
     const newReply = {
       id: Date.now(),
       text: replyText,
@@ -128,10 +174,6 @@ const Posts = ({ user, setUser }) => {
   };
 
   const handleDeleteComment = (postId, commentId) => {
-    if (!user.isLoggedIn) {
-      alert('Please log in to delete comment');
-      return;
-    }
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
         post._id === postId
@@ -145,10 +187,6 @@ const Posts = ({ user, setUser }) => {
   };
 
   const handleDeleteReply = (postId, commentId, replyId) => {
-    if (!user.isLoggedIn) {
-      alert('Please log in to delete reply');
-      return;
-    }
     setPosts((prevPosts) =>
       prevPosts.map((post) =>
         post._id === postId
@@ -170,14 +208,15 @@ const Posts = ({ user, setUser }) => {
 
   return (
     <div className='posts'>
+      <AddPost isOpen={isOpen} onRequestClose={() => setIsOpen(false)} fetchPosts={fetchPosts} />
       {posts.map((post) => (
         <div className="posts-card" key={post._id}>
           <div className="posts-header">
-          {post.author.profileImage ? (
-                <img src={post.author.profileImage} alt="Profile" />
+            {post.author.profileImage ? (
+              <img src={post.author.profileImage} alt="Profile" />
             ) : (
-                <i className="fa-solid fa-user"></i>
-            )} 
+              <i className="fa-solid fa-user"></i>
+            )}
             <span>{post.author.name}</span>
             <span className="follow"><a href="#">·Follow</a></span>
             <p className="posts-date">{new Date(post.createdAt).toLocaleString()}</p>
@@ -199,10 +238,14 @@ const Posts = ({ user, setUser }) => {
               <button className="downvote" onClick={() => handleDownvote(post._id)}>
                 <PiArrowFatDownThin /> {post.dislikeCount || 0} Downvote
               </button>
-              <button onClick={() => alert('Please log in to comment')}>
-                <FaRegComment /> {post.comments?.length || 0} Comment
-              </button>
-              <button onClick={() => alert('Please log in to share')}><GrPowerCycle /> Share</button>
+              {user.isLoggedIn && (
+                <>
+                  <button onClick={() => handleCommentSubmit(post._id)}>
+                    <FaRegComment /> {post.comments?.length || 0} Comment
+                  </button>
+                  <button onClick={() => alert('Please log in to share')}><GrPowerCycle /> Share</button>
+                </>
+              )}
             </div>
             <i className="fa-solid fa-ellipsis"></i>
           </div>
@@ -220,34 +263,40 @@ const Posts = ({ user, setUser }) => {
               {post.comments && post.comments.map((comment) => (
                 <div key={comment.id} className="comment">
                   <p>{comment.text}</p>
-                  <button className="delete-button" onClick={() => handleDeleteComment(post._id, comment.id)}>Delete</button>
+                  {user.isLoggedIn && (
+                    <button className="delete-button" onClick={() => handleDeleteComment(post._id, comment.id)}>Delete</button>
+                  )}
                   <div className="replies">
                     {comment.replies && comment.replies.map((reply) => (
                       <div key={reply.id} className="reply">
                         <p>{reply.text}</p>
-                        <button className="delete-button" onClick={() => handleDeleteReply(post._id, comment.id, reply.id)}>Delete</button>
+                        {user.isLoggedIn && (
+                          <button className="delete-button" onClick={() => handleDeleteReply(post._id, comment.id, reply.id)}>Delete</button>
+                        )}
                       </div>
                     ))}
-                    <input
-                      type="text"
-                      placeholder="Reply..."
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && e.target.value.trim() !== "") {
-                          handleReplySubmit(post._id, comment.id, e.target.value);
-                          e.target.value = "";
-                        }
-                      }}
-                    />
+                    {user.isLoggedIn && (
+                      <div className="reply-input">
+                        <input type="text" placeholder="Add a reply..." />
+                        <button onClick={() => handleReplySubmit(post._id, comment.id, "new reply")}>Reply</button>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           )}
+          {user.isLoggedIn && (
+            <div className="edit-delete">
+              <button onClick={() => setIsOpen(true)}>Edit</button>
+              <button onClick={() => deletePost(post._id)}>Delete</button>
+            </div>
+          )}
         </div>
       ))}
-      <div className="pagination-buttons">
-        <button className="pagination-button" onClick={() => setPageNumber(prev => Math.max(prev - 1, 1))} disabled={pageNumber === 1}>Previous</button>
-        <button className="pagination-button" onClick={() => setPageNumber(prev => prev + 1)}>Next</button>
+      <div className="pagination">
+        <button onClick={() => setPageNumber(prev => prev > 1 ? prev - 1 : prev)}>Previous</button>
+        <button onClick={() => setPageNumber(prev => prev + 1)}>Next</button>
       </div>
     </div>
   );
