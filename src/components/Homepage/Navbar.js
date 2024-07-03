@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './Navbar.css';
 import { useNavigate, Link } from 'react-router-dom';
+import AddPost from './Addpost';
 
 const Navbar = ({ user, setUser }) => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -24,6 +26,10 @@ const Navbar = ({ user, setUser }) => {
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
     document.body.classList.toggle('dark-mode');
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
@@ -59,8 +65,9 @@ const Navbar = ({ user, setUser }) => {
           )}
         </div>
         <button className="try-quora-plus">Try Quora+</button>
-        <button className="add-question">Add question</button>
+        <button className="add-question" onClick={toggleModal}>Add question</button>
       </div>
+      {isModalOpen && <AddPost isOpen={isModalOpen} onRequestClose={toggleModal} />}
     </div>
   );
 };

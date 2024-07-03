@@ -4,6 +4,8 @@ import Homepage from './Homepage/Homepage';
 import Login from './LoginPage/Login';
 import ProfileSettings from "./LoginPage/ProfileSettings";
 import Signup from './LoginPage/Signup';
+import Addpost from './Homepage/Addpost';
+import Answers from './AnswersPage/Answers';
 
 function App() {
   const [user, setUser] = useState({ isLoggedIn: false, email: '', firstName: '' });
@@ -15,6 +17,8 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup setUser={setUser} />} />
         <Route path="/profile-settings" element={<ProfileSettings />} />
+        <Route path="/addpost" element={<Addpost user={user} setUser={setUser} />} />
+        <Route path="/answers" element={<Answers />} />
       </Routes>
     </Router>
   );

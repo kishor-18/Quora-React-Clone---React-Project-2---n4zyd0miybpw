@@ -1,0 +1,26 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .questions {
+    width: 80%;
+    margin-top: 20px;
+  }
+  
+  .question-card {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
