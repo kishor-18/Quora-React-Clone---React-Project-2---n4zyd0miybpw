@@ -18,7 +18,7 @@ function App() {
         <Route path="/signup" element={<Signup setUser={setUser} />} />
         <Route path="/profile-settings" element={<ProfileSettings />} />
         <Route path="/addpost" element={<Addpost user={user} setUser={setUser} />} />
-        <Route path="/answers" element={<Answers />} />
+        <Route path="/answers" element={<Answers user={user} setUser={setUser} />} />
       </Routes>
     </Router>
   );

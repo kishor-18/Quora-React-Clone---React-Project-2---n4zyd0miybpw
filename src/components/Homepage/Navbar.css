@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     padding: 10px 100px;
+    justify-content: space-between;
     height: 60px;
     margin: 0 40px;
     background-color: #fff;
@@ -53,14 +54,13 @@
   .navbar-right {
     display: flex;
     align-items: center;
-    position: relative;
   }
   
   .navbar-search {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-right: 50px;
+    margin-right: 0px;
   }
   
   .try-quora-plus {
@@ -69,8 +69,9 @@
     padding: 0 40px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    margin-right: 18px;
+    margin-right: 3px;
     cursor: pointer;
+    margin-right: 0;
   }
   
   .add-question {
@@ -80,6 +81,7 @@
     border-radius: 4px;
     border: none;
     cursor: pointer;
+    margin-right: 0px;
   }
   
   .user-menu {
@@ -87,7 +89,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    margin-left: 50px;
+    margin-left: 20px;
   }
   
   .user-menu i {

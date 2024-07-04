@@ -41,6 +41,10 @@ body.dark-mode {
 .advertisement {
   grid-area: advertisement;
 }
+
+.answers {
+  grid-area: answers;
+}
 .dark-mode .navbar {
   background-color: #444;
 }
