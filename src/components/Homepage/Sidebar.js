@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import './Sidebar.css';
 
-const Sidebar = ({ user, setUser }) => {
+const Sidebar = ({ user, setUser, setSpaces }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -28,7 +28,7 @@ const Sidebar = ({ user, setUser }) => {
     formData.append('title', title);
     formData.append('description', description);
     if (image) {
-      formData.append('images', image); // Ensure this is a File object
+      formData.append('images', image); 
     }
 
     try {
@@ -40,11 +40,12 @@ const Sidebar = ({ user, setUser }) => {
 
       if (response.ok) {
         const data = await response.json();
-        
         console.log("handleCreateSpace",data);
+        setSpaces(prevSpaces => [...prevSpaces, data]); 
         navigate('/spaces');
+        setModalIsOpen(false); 
       } else {
-        const responseText = await response.text(); // Read response text once
+        const responseText = await response.text(); 
         console.error('Failed to create space:', responseText);
         alert(`Failed to create space: ${responseText}`);
       }
@@ -53,6 +54,12 @@ const Sidebar = ({ user, setUser }) => {
       alert(`Error creating space: ${error.message}`);
     }
   };
+
+  useEffect(() => {
+    if (!user.isLoggedIn) {
+      setModalIsOpen(false);
+    }
+  }, [user]);
 
   return (
     <>
@@ -65,7 +72,7 @@ const Sidebar = ({ user, setUser }) => {
           <li><a href="#" onClick={() => handleSidebarClick('access Trending on social media')}>Trending on social media</a></li>
         </ul>
       </div>
-      <ReactModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+      <ReactModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="modal" overlayClassName="overlay">
         <div className="modal">
           <div className="modal-header">
             <h2>Create a Space</h2>
@@ -88,8 +95,8 @@ const Sidebar = ({ user, setUser }) => {
             />
           </div>
           <div className="modal-actions">
-            <button onClick={handleCreateSpace}>Create</button>
-            <button onClick={() => setModalIsOpen(false)}>Cancel</button>
+            <button className="addpost-button" onClick={handleCreateSpace}>Create</button>
+            <button className="addpost-button" onClick={() => setModalIsOpen(false)}>Cancel</button>
           </div>
         </div>
       </ReactModal>

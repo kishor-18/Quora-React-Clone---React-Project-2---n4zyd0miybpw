@@ -1,116 +1,114 @@
 .sidebar {
-    background-color: hsl(0, 0%, 95%);
-    padding: 10px 40px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 80px);
-    /* border: 1px solid #0f0e0e; */
-    align-items: center;
+  background-color: hsl(0, 0%, 95%);
+  padding: 10px 40px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  align-items: center;
 }
 
 .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 1.2rem;
-    line-height: 1.5;
-    font-weight: 400;
-    color: #333;
-    margin-left: 100px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #333;
+  margin-left: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .sidebar ul li {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .sidebar ul li a {
-    color: #333;
-    text-decoration: none;
+  color: #333;
+  text-decoration: none;
 }
 
 .modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    width: 500px;
-    max-width: 80%;
-    outline: none;
-  }
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75);
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .tab-button {
-    flex: 1;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    cursor: pointer;
-  }
-  
-  .tab-button.active {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .modal-body {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  input[type="text"], textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  input[type="file"] {
-    margin-bottom: 10px;
-  }
-  
-  .modal-actions {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .addpost-button {
-    padding: 10px 20px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .addpost-button:first-of-type {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .addpost-button:last-of-type {
-    background-color: #6c757d;
-    color: #fff;
-  }
-  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 80%;
+  outline: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addpost-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addpost-button:first-of-type {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.addpost-button:last-of-type {
+  background-color: #6c757d;
+  color: #fff;
+}
