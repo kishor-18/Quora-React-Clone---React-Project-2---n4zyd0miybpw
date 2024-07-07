@@ -23,8 +23,8 @@ const Posts = ({ user, searchQuery }) => {
     try {
       const response = await fetch('https://academics.newtonschool.co/api/v1/quora/post', {
         headers: {
-          ...header, // Include the Authorization header here
-          'projectID': 'vmyitayk3fnu' // Optionally, include projectID if needed
+          ...header, 
+          'projectID': 'vmyitayk3fnu' 
         }
       });
       if (response.ok) {
@@ -44,7 +44,7 @@ const Posts = ({ user, searchQuery }) => {
   }, []);
 
   useEffect(() => {
-    if (searchQuery && posts.length > 0) { // Add a check to ensure posts array is not empty
+    if (searchQuery && posts.length > 0) {
       setFilteredPosts(posts.filter(post => 
         post.title && post.title.toLowerCase().includes(searchQuery.toLowerCase())
       ));
