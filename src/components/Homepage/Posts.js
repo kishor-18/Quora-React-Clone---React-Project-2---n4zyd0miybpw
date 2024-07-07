@@ -5,8 +5,9 @@ import { GrPowerCycle } from "react-icons/gr";
 import './Posts.css';
 import AddPost from './Addpost';
 
-const Posts = ({ user }) => {
+const Posts = ({ user, searchQuery }) => {
   const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [commentText, setCommentText] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -20,16 +21,37 @@ const Posts = ({ user }) => {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch(`https://academics.newtonschool.co/api/v1/quora/post?limit=10&page=${pageNumber}`, {
-        method: 'GET',
-        headers: header
+      const response = await fetch('https://academics.newtonschool.co/api/v1/quora/post', {
+        headers: {
+          ...header, // Include the Authorization header here
+          'projectID': 'vmyitayk3fnu' // Optionally, include projectID if needed
+        }
       });
-      const data = await response.json();
-      setPosts(data.data);
+      if (response.ok) {
+        const data = await response.json();
+        setPosts(data.data);
+        setFilteredPosts(data.data);
+      } else {
+        console.error('Error fetching posts:', response.statusText);
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Error fetching posts:', error);
     }
   };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery && posts.length > 0) { // Add a check to ensure posts array is not empty
+      setFilteredPosts(posts.filter(post => 
+        post.title && post.title.toLowerCase().includes(searchQuery.toLowerCase())
+      ));
+    } else {
+      setFilteredPosts(posts);
+    }
+  }, [searchQuery, posts]);
 
   const updatePost = async (id, title, content, images) => {
     try {
@@ -79,13 +101,9 @@ const Posts = ({ user }) => {
     }
   };
 
-  useEffect(() => {
-    fetchPosts();
-  }, [pageNumber]);
-
   const toggleContentVisibility = (id) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
         post._id === id ? { ...post, isVisible: !post.isVisible } : post
       )
     );
@@ -96,8 +114,8 @@ const Posts = ({ user }) => {
       alert('Please log in to upvote');
       return;
     }
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
         post._id === id
           ? {
               ...post,
@@ -116,8 +134,8 @@ const Posts = ({ user }) => {
       alert('Please log in to downvote');
       return;
     }
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
         post._id === id
           ? {
               ...post,
@@ -142,8 +160,8 @@ const Posts = ({ user }) => {
       replies: [],
     };
 
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
         post._id === postId ? { ...post, comments: [...(post.comments || []), newComment] } : post
       )
     );
@@ -157,12 +175,12 @@ const Posts = ({ user }) => {
       text: replyText,
     };
 
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
         post._id === postId
           ? {
               ...post,
-              comments: post.comments.map((comment) =>
+              comments: post.comments.map(comment =>
                 comment.id === commentId
                   ? { ...comment, replies: [...(comment.replies || []), newReply] }
                   : comment
@@ -174,12 +192,12 @@ const Posts = ({ user }) => {
   };
 
   const handleDeleteComment = (postId, commentId) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
         post._id === postId
           ? {
               ...post,
-              comments: post.comments.filter((comment) => comment.id !== commentId),
+              comments: post.comments.filter(comment => comment.id !== commentId),
             }
           : post
       )
@@ -187,16 +205,16 @@ const Posts = ({ user }) => {
   };
 
   const handleDeleteReply = (postId, commentId, replyId) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
         post._id === postId
           ? {
               ...post,
-              comments: post.comments.map((comment) =>
+              comments: post.comments.map(comment =>
                 comment.id === commentId
                   ? {
                       ...comment,
-                      replies: comment.replies.filter((reply) => reply.id !== replyId),
+                      replies: comment.replies.filter(reply => reply.id !== replyId),
                     }
                   : comment
               ),
@@ -209,7 +227,7 @@ const Posts = ({ user }) => {
   return (
     <div className='posts'>
       <AddPost isOpen={isOpen} onRequestClose={() => setIsOpen(false)} fetchPosts={fetchPosts} />
-      {posts.map((post) => (
+      {filteredPosts.map(post => (
         <div className="posts-card" key={post._id}>
           <div className="posts-header">
             {post.author.profileImage ? (
@@ -260,14 +278,14 @@ const Posts = ({ user }) => {
                 />
                 <button className="comment-button" onClick={() => handleCommentSubmit(post._id)}>Add Comment</button>
               </div>
-              {post.comments && post.comments.map((comment) => (
+              {post.comments && post.comments.map(comment => (
                 <div key={comment.id} className="comment">
                   <p>{comment.text}</p>
                   {user.isLoggedIn && (
                     <button className="delete-button" onClick={() => handleDeleteComment(post._id, comment.id)}>Delete</button>
                   )}
                   <div className="replies">
-                    {comment.replies && comment.replies.map((reply) => (
+                    {comment.replies && comment.replies.map(reply => (
                       <div key={reply.id} className="reply">
                         <p>{reply.text}</p>
                         {user.isLoggedIn && (

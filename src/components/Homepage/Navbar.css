@@ -185,5 +185,37 @@
     background-color: #aaa;
     color: #fff;
   }
+   
+  /* Navbar.css */
+
+.search-results {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.search-results ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-results li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.search-results li a {
+  text-decoration: none;
+  color: black;
+}
+
+.search-results li:hover {
+  background-color: #f5f5f5;
+}
 
   

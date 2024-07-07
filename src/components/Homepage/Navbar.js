@@ -4,11 +4,12 @@ import './Navbar.css';
 import { useNavigate, Link } from 'react-router-dom';
 import AddPost from './Addpost';
 
-const Navbar = ({ user, setUser }) => {
+const Navbar = ({ user, setUser, onSearch }) => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -47,21 +48,33 @@ const Navbar = ({ user, setUser }) => {
     toggleModal();
   };
 
+  const handleSearchInputChange = (e) => {
+    const value = e.target.value;
+    setSearchInput(value);
+    onSearch(value);
+  };
+
   return (
     <div className={`navbar ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <Link to="/" className="logo">Quora</Link>
       <nav className="navbar-nav">
         <ul>
           <li><Link to="/home"><i className="fa-solid fa-house"></i></Link></li>
-          <li><Link to="/following"><i className="fa-solid fa-user-friends"></i></Link></li>
+          <li><Link to="/following"><i className="fa-solid fa-user-group"></i></Link></li>
           <li><Link to="/answers"><i className="fa-solid fa-pen-to-square"></i></Link></li>
-          <li><Link to="/spaces"><i className="fa-solid fa-user-group"></i></Link></li>
+          <li><Link to="/spaces"><i className="fa-solid fa-people-group"></i></Link></li>
           <li><Link to="/notifications"><i className="fa-solid fa-bell"></i></Link></li>
         </ul>
       </nav>
       <div className="navbar-right">
         <i className="fa-solid fa-magnifying-glass"></i>
-        <input className="navbar-search" type="text" placeholder="Search Quora" />
+        <input
+          className="navbar-search"
+          type="text"
+          placeholder="Search Quora"
+          value={searchInput}
+          onChange={handleSearchInputChange}
+        />
         <div className="user-menu" onClick={toggleDropdown}>
           <i className="fa-solid fa-user"></i>
           {isDropdownOpen && (
