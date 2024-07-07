@@ -19,9 +19,9 @@ const Posts = ({ user, searchQuery }) => {
     'Content-Type': 'application/json'
   };
 
-  const fetchPosts = async () => {
+  const fetchPosts = async (page) => {
     try {
-      const response = await fetch('https://academics.newtonschool.co/api/v1/quora/post', {
+      const response = await fetch(`https://academics.newtonschool.co/api/v1/quora/post?page=${page}`, {
         headers: {
           ...header, 
           'projectID': 'vmyitayk3fnu' 
@@ -40,8 +40,8 @@ const Posts = ({ user, searchQuery }) => {
   };
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    fetchPosts(pageNumber);
+  }, [pageNumber]);
 
   useEffect(() => {
     if (searchQuery && posts.length > 0) {
@@ -52,37 +52,6 @@ const Posts = ({ user, searchQuery }) => {
       setFilteredPosts(posts);
     }
   }, [searchQuery, posts]);
-
-  const updatePost = async (id, title, content, images) => {
-    try {
-      const url = `https://academics.newtonschool.co/api/v1/quora/post/${id}`;
-      const formData = new FormData();
-      formData.append('title', title);
-      formData.append('content', content);
-      if (images) {
-        formData.append('image', images);
-      }
-  
-      const response = await fetch(url, {
-        method: 'PATCH',
-        headers: header,
-        body: formData
-      });
-  
-      const data = await response.json();
-      if (response.ok) {
-        setPosts(prevPosts =>
-          prevPosts.map(post =>
-            post._id === id ? { ...post, title, content, images: data.data.images } : post
-          )
-        );
-      } else {
-        console.error('Error updating post:', data); // Log server response for detailed error
-      }
-    } catch (error) {
-      console.error('Error updating post:', error); // Catch any other errors in the request process
-    }
-  };
 
   const deletePost = async (id) => {
     try {
@@ -226,7 +195,7 @@ const Posts = ({ user, searchQuery }) => {
 
   return (
     <div className='posts'>
-      <AddPost isOpen={isOpen} onRequestClose={() => setIsOpen(false)} fetchPosts={fetchPosts} />
+      <AddPost isOpen={isOpen} onRequestClose={() => setIsOpen(false)} fetchPosts={() => fetchPosts(pageNumber)} />
       {filteredPosts.map(post => (
         <div className="posts-card" key={post._id}>
           <div className="posts-header">
