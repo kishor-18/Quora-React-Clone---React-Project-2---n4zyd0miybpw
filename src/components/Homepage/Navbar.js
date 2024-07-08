@@ -86,7 +86,7 @@ const Navbar = ({ user, setUser, onSearch }) => {
                   <button onClick={handleLogoutClick}>Logout</button>
                 </>
               ) : (
-                <button onClick={() => navigate('/login')}>Login</button>
+                <button onClick={() => navigate('/login', { state: { isDarkMode } })}>Login</button>
               )}
               <button onClick={toggleTheme}>Toggle Dark Mode</button>
             </div>

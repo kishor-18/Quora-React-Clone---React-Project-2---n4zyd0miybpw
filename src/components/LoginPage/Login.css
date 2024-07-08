@@ -1,60 +1,81 @@
-body .login-page{
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+/* Login.css */
+
+body.dark-mode {
     background-color: #2b2b2b;
     color: white;
-}
-
-.login-page {
+  }
+  
+  body.light-mode {
+    background-color: #f0f0f0;
+    color: black;
+  }
+  
+  .login-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    /* background-image: url('/path/to/your/background-image.png');  */
+    background-image: url('../../Assets/bgimg.jpeg');
     background-size: cover;
-}
-
-.login-container {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-position: center;
+  }
+  
+  .login-container {
     padding: 20px;
     border-radius: 8px;
     width: 400px;
     text-align: center;
-}
-
-.quora-logo {
+    /* background-color: var(--login-container-bg); */
+  }
+  
+  body.light-mode .login-container {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  body.dark-mode .login-container {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .quora-logo {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
-}
-
-.tagline {
+  }
+  
+  .tagline {
     font-size: 1rem;
     margin-bottom: 20px;
-}
-
-.form-group {
+  }
+  
+  .form-group {
     margin: 10px 0;
     text-align: left;
-}
-
-.form-group label {
+  }
+  
+  .form-group label {
     display: block;
     margin-bottom: 5px;
-}
-
-.form-group input {
+  }
+  
+  .form-group input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+  }
+  
+  body.dark-mode .form-group input {
     background-color: #333;
     color: white;
-}
-
-.login-btn {
+  }
+  
+  body.light-mode .form-group input {
+    background-color: #fff;
+    color: black;
+  }
+  
+  .login-btn {
     width: 100%;
     padding: 10px;
     margin-top: 20px;
@@ -63,33 +84,34 @@ body .login-page{
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.social-login {
+  }
+  
+  .social-login {
     margin-top: 20px;
-}
-
-.social-btn {
+  }
+  
+  .social-btn {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.google-btn {
+  }
+  
+  .google-btn {
     background-color: #db4437;
     color: #fff;
-}
-
-.facebook-btn {
+  }
+  
+  .facebook-btn {
     background-color: #3b5998;
     color: #fff;
-}
-
-.signup-link {
+  }
+  
+  .signup-link {
     margin-top: 20px;
     color: #007bff;
     cursor: pointer;
-}
+  }
+  

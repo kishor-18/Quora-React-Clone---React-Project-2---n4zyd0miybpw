@@ -8,7 +8,7 @@ const Spaces = () => {
   useEffect(() => {
     const fetchSpaces = async () => {
       const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJmMDllOTVlMzg5ZmIxMjM1ZGMyZCIsImlhdCI6MTcxOTk5MTA1MCwiZXhwIjoxNzUxNTI3MDUwfQ.uJcBDToCRYd34LZ2ouRD_p539HNXbdyCnxakRhL6POw'; // Replace with your actual JWT token
-      const projectID = 'vmyitayk3fnu'; // Replace with your actual project ID
+      const projectID = 'vmyitayk3fnu';
 
       const response = await fetch('https://academics.newtonschool.co/api/v1/quora/channel/', {
         method: 'GET',
@@ -31,7 +31,7 @@ const Spaces = () => {
 
   const handleFollow = async (spaceId) => {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJmMDllOTVlMzg5ZmIxMjM1ZGMyZCIsImlhdCI6MTcxOTk5MTA1MCwiZXhwIjoxNzUxNTI3MDUwfQ.uJcBDToCRYd34LZ2ouRD_p539HNXbdyCnxakRhL6POw'; // Replace with your actual JWT token
-    const projectID = 'vmyitayk3fnu'; // Replace with your actual project ID
+    const projectID = 'vmyitayk3fnu'; 
 
     const response = await fetch(`https://academics.newtonschool.co/api/v1/quora/channel/follow/${spaceId}/`, {
       method: 'POST',
@@ -50,7 +50,7 @@ const Spaces = () => {
 
   const handleUnfollow = async (spaceId) => {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODJmMDllOTVlMzg5ZmIxMjM1ZGMyZCIsImlhdCI6MTcxOTk5MTA1MCwiZXhwIjoxNzUxNTI3MDUwfQ.uJcBDToCRYd34LZ2ouRD_p539HNXbdyCnxakRhL6POw'; // Replace with your actual JWT token
-    const projectID = 'vmyitayk3fnu'; // Replace with your actual project ID
+    const projectID = 'vmyitayk3fnu'; 
 
     const response = await fetch(`https://academics.newtonschool.co/api/v1/quora/channel/unfollow/${spaceId}/`, {
       method: 'DELETE',

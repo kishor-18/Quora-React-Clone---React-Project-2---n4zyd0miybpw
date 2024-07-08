@@ -1,192 +1,180 @@
 .navbar {
-    display: flex;
-    align-items: center;
-    padding: 10px 100px;
-    justify-content: space-between;
-    height: 60px;
-    margin: 0 40px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* border: 1px solid #1b1919; */
-  }
-  
-  .logo {
-    font-size: 35px;
-    font-weight: bold;
-    color: rgb(197, 14, 14);
-    text-decoration: none;
-  }
-  
-  .navbar-nav ul {
-    display: flex;
-    list-style: none;
-    font-size: 30px;
-    margin: 0 30px;
-    padding: 0;
-  }
-  
-  .navbar-nav li {
-    margin-right: 20px;
-  }
-  
-  .navbar-nav a {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-nav i {
-    margin-right: 5px;
-    color: rgb(197, 14, 14);
-  }
-  
-  .notification-count {
-    background-color: red;
-    color: #fff;
-    font-size: 12px;
-    padding: 2px 5px;
-    border-radius: 50%;
-    margin-left: 5px;
-  }
-  
-  .navbar-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-search {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 0px;
-  }
-  
-  .try-quora-plus {
-    background-color: #fff;
-    color: #333;
-    padding: 0 40px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-right: 3px;
-    cursor: pointer;
-    margin-right: 0;
-  }
-  
-  .add-question {
-    background-color: red;
-    color: #fff;
-    padding: 0 50px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    margin-right: 0px;
-  }
-  
-  .user-menu {
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-  }
-  
-  .user-menu i {
-    margin-right: 25px;
-    color: #333;
-    background-color: #ecd6d6;
-    border: 2px solid rgb(194, 163, 163);
-    border-radius: 50%;
-    font-size: 30px;
-  }
-  
-  .user-menu .dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    z-index: 1000;
-    width: 150px;
-  }
-  
-  .user-menu .dropdown a,
-  .user-menu .dropdown button {
-    display: block;
-    color: #333;
-    text-decoration: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    text-align: left;
-    width: 100%;
-  }
-  
-  .user-menu .dropdown button:hover,
-  .user-menu .dropdown a:hover {
-    background-color: #f0f0f0;
-  }
+  display: flex;
+  align-items: center;
+  padding: 0 70px; /* Adjusted padding to fit the search bar */
+  justify-content: space-evenly;
+  height: 60px;
+  margin-left: 130px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* border: 1px solid #1b1919; */
+}
 
-  .dark-mode {
-    background-color: #333;
-    color: #fff;
-  }
-  
-  .dark-mode.navbar-nav ul li a {
-    color: #fff;
-  }
-  
-  .dark-mode.navbar-right {
-    background-color: #444;
-  }
-  
-  .dark-mode.navbar-right i {
-    color: #fff;
-  }
-  
-  .dark-mode.navbar-right.navbar-search {
-    background-color: #555;
-    color: #fff;
-  }
-  
-  .dark-mode.navbar-right.user-menu {
-    background-color: #666;
-  }
-  
-  .dark-mode.navbar-right.user-menu i {
-    color: #fff;
-  }
-  
-  .dark-mode.navbar-right.dropdown {
-    background-color: #777;
-    color: #fff;
-  }
-  
-  .dark-mode.navbar-right.dropdown a {
-    color: #fff;
-  }
-  
-  .dark-mode.navbar-right.dropdown button {
-    background-color: #888;
-    color: #fff;
-  }
-  
-  .dark-mode.navbar-right.try-quora-plus {
-    background-color: #999;
-    color: #fff;
-  }
-  
-  .dark-mode.navbar-right.add-question {
-    background-color: #aaa;
-    color: #fff;
-  }
-   
-  /* Navbar.css */
+.logo {
+  font-size: 35px;
+  font-weight: bold;
+  color: rgb(197, 14, 14);
+  text-decoration: none;
+}
+
+.navbar-nav ul {
+  display: flex;
+  list-style: none;
+  font-size: 30px;
+  margin: 0 20px;
+  padding: 0;
+}
+
+.navbar-nav li {
+  margin-right: 10px;
+}
+
+.navbar-nav a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav i {
+  margin-right: 5px;
+  color: rgb(197, 14, 14);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.navbar-search {
+  flex: 1; /* Allows the search bar to take available space */
+  padding: 5px 10px; /* Adjusted padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 0 10px;
+}
+
+.try-quora-plus {
+  background-color: #fff;
+  color: #333;
+  padding: 0 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.add-question {
+  background-color: red;
+  color: #fff;
+  padding: 0 20px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.user-menu {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.user-menu i {
+  margin-right: 25px;
+  color: #333;
+  background-color: #ecd6d6;
+  border: 2px solid rgb(194, 163, 163);
+  border-radius: 50%;
+  font-size: 30px;
+}
+
+.user-menu .dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+  width: 150px;
+}
+
+.user-menu .dropdown a,
+.user-menu .dropdown button {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+}
+
+.user-menu .dropdown button:hover,
+.user-menu .dropdown a:hover {
+  background-color: #f0f0f0;
+}
+
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode .navbar-nav ul li a {
+  color: #fff;
+}
+
+.dark-mode .navbar-right {
+  background-color: #444;
+}
+
+.dark-mode .navbar-right i {
+  color: #fff;
+}
+
+.dark-mode .navbar-search {
+  background-color: #555;
+  color: #fff;
+}
+
+.dark-mode .user-menu {
+  background-color: #666;
+}
+
+.dark-mode .user-menu i {
+  color: #fff;
+}
+
+.dark-mode .dropdown {
+  background-color: #777;
+  color: #fff;
+}
+
+.dark-mode .dropdown a {
+  color: #fff;
+}
+
+.dark-mode .dropdown button {
+  background-color: #888;
+  color: #fff;
+}
+
+.dark-mode .try-quora-plus {
+  background-color: #999;
+  color: #fff;
+}
+
+.dark-mode .add-question {
+  background-color: #aaa;
+  color: #fff;
+}
 
 .search-results {
   position: absolute;
@@ -217,5 +205,3 @@
 .search-results li:hover {
   background-color: #f5f5f5;
 }
-
-  

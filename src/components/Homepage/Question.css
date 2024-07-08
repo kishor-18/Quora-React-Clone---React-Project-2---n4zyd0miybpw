@@ -2,15 +2,31 @@
     background-color: #f9f9f9;
     padding: 20px;
     border: 1px solid #ccc;
-}
-
-.question-title {
+  }
+  
+  .question-title {
     display: flex;
     align-items: center;
-}
-
-.question-body {
+  }
+  
+  .question-input {
+    flex-grow: 1;
+    margin-left: 10px;
+  }
+  
+  .question-body {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 10px;
-}
+  }
+  
+  .question-action {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .question-action i {
+    margin-right: 5px;
+  }
+  

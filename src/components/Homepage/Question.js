@@ -17,9 +17,15 @@ const Question = ({ user, setUser }) => {
         <input className='question-input' type="text" placeholder='What do you want to ask or share?' />
       </div>
       <div className="question-body">
-        <i className='fa-solid fa-question' onClick={() => handleActionClick('ask')}></i><span>Ask</span>
-        <i className='fa-solid fa-pen-to-square' onClick={() => handleActionClick('answer')}></i>Answer
-        <i className='fa-solid fa-pen' onClick={() => handleActionClick('post')}></i>Post
+        <div className="question-action" onClick={() => handleActionClick('ask')}>
+          <i className='fa-solid fa-question'></i><span>Ask</span>
+        </div>
+        <div className="question-action" onClick={() => handleActionClick('answer')}>
+          <i className='fa-solid fa-pen-to-square'></i><span>Answer</span>
+        </div>
+        <div className="question-action" onClick={() => handleActionClick('post')}>
+          <i className='fa-solid fa-pen'></i><span>Post</span>
+        </div>
       </div>
     </div>
   );
