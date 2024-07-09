@@ -43,6 +43,25 @@
     font-size: 20px;
 }
 
+.edit-delete {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .edit-delete button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    color: #555;
+  }
+  
+  .edit-delete button:hover {
+    color: #000;
+  }
+
 .follow {
     cursor: pointer;
     background-color: #fff;

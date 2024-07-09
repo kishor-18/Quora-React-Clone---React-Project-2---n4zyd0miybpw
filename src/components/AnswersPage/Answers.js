@@ -8,12 +8,12 @@ import '../../styles/App.css'
 import '../Homepage/Navbar.css'
 import '../Homepage/Posts.css'
 
-const Answers = ({ user}) => {
+const Answers = ({ user,  searchQuery }) => {
   return (
     <div className="container">
       <Navbar user={user} className="navbar" />
-      <Posts user={user} className="posts" />
-      <Sidebar user={user} className="sidebar" />
+      <Posts user={user}  searchQuery={searchQuery} isAnswerPage={true} className="posts" />
+      <Sidebar user={user}  className="sidebar" />
       <Ad className="advertisement" />
     </div>
   )
