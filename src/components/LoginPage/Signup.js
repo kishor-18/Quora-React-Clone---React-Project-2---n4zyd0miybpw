@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Signup.css';  // Make sure to import the CSS file
 
 const Signup = ({ setUser }) => {
   const navigate = useNavigate();
@@ -49,8 +50,8 @@ const Signup = ({ setUser }) => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="signup-body">
+      <form className="signup-form" onSubmit={handleSubmit}>
         <label>
           Firstname:
           <input
@@ -87,7 +88,7 @@ const Signup = ({ setUser }) => {
           />
         </label>
         <br />
-        <button type="submit">Signup</button>
+        <button className="signup-button" type="submit">Signup</button>
       </form>
     </div>
   )

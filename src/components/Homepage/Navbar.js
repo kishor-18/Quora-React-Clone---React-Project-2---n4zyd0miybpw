@@ -35,7 +35,7 @@ const Navbar = ({ user, setUser, onSearch }) => {
 
   const handleTryQuoraPlusClick = () => {
     if (!user.isLoggedIn) {
-      alert('Please log in to use try Quora+');
+      alert('Please log in to use try Quora+');     
       return;
     }
   };
