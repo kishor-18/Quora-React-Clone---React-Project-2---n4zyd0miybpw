@@ -23,13 +23,13 @@ const Posts = ({ user, searchQuery, isAnswerPage }) => {
     try {
       const response = await fetch(`https://academics.newtonschool.co/api/v1/quora/post?page=${page}`, {
         headers: {
-          ...header, 
-          'projectID': 'vmyitayk3fnu' 
+          ...header,
+          'projectID': 'vmyitayk3fnu'
         }
       });
       if (response.ok) {
         const data = await response.json();
-        console.log('Fetched posts data:', data); // Log fetched data
+        console.log('Fetched posts data:', data);
         setPosts(data.data);
         setFilteredPosts(data.data);
       } else {
@@ -41,6 +41,7 @@ const Posts = ({ user, searchQuery, isAnswerPage }) => {
       alert('Error fetching posts. Please check your network connection or try again later.');
     }
   };
+  
 
   useEffect(() => {
     fetchPosts(pageNumber);
