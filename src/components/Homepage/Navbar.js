@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './Navbar.css';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import AddPost from './Addpost';
 
 const Navbar = ({ user, setUser, onSearch }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,16 +55,40 @@ const Navbar = ({ user, setUser, onSearch }) => {
     onSearch(value);
   };
 
+  const getNavLinkClass = (path) => {
+    return location.pathname === path ? 'active' : '';
+  };
+
   return (
     <div className={`navbar ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <Link to="/" className="logo">Quora</Link>
       <nav className="navbar-nav">
         <ul>
-          <li><Link to="/home"><i className="fa-solid fa-house"></i></Link></li>
-          <li><Link to="/following"><i className="fa-solid fa-user-group"></i></Link></li>
-          <li><Link to="/answers"><i className="fa-solid fa-pen-to-square"></i></Link></li>
-          <li><Link to="/spaces"><i className="fa-solid fa-people-group"></i></Link></li>
-          <li><Link to="/notifications"><i className="fa-solid fa-bell"></i></Link></li>
+          <li>
+            <Link to="/" className={getNavLinkClass('/')}>
+              <i className="fa-solid fa-house"></i>
+            </Link>
+          </li>
+          <li>
+            <Link to="/following" className={getNavLinkClass('/following')}>
+              <i className="fa-solid fa-user-group"></i>
+            </Link>
+          </li>
+          <li>
+            <Link to="/answers" className={getNavLinkClass('/answers')}>
+              <i className="fa-solid fa-pen-to-square"></i>
+            </Link>
+          </li>
+          <li>
+            <Link to="/spaces" className={getNavLinkClass('/spaces')}>
+              <i className="fa-solid fa-people-group"></i>
+            </Link>
+          </li>
+          <li>
+            <Link to="/notifications" className={getNavLinkClass('/notifications')}>
+              <i className="fa-solid fa-bell"></i>
+            </Link>
+          </li>
         </ul>
       </nav>
       <div className="navbar-right">

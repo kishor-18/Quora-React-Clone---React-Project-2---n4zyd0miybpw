@@ -66,10 +66,10 @@ const Sidebar = ({ user, setUser, setSpaces }) => {
       <div className="sidebar">
         <h3 onClick={() => handleSidebarClick('create space')}>+ Create Space</h3>
         <ul>
-          <li><a href="#" onClick={() => handleSidebarClick('access Food Therapy')}>Food Therapy</a></li>
-          <li><a href="#" onClick={() => handleSidebarClick('access Entrepreneurship Ideas')}>Entrepreneurship Ideas</a></li>
-          <li><a href="#" onClick={() => handleSidebarClick('access Business Ideas')}>Business Ideas</a></li>
-          <li><a href="#" onClick={() => handleSidebarClick('access Trending on social media')}>Trending on social media</a></li>
+          <li><a href="#" onClick={() => window.open('https://www.quora.com/Is-it-important-for-your-therapist-to-know-if-you-skip-meals')}>Food Therapy</a></li>
+          <li><a href="#" onClick={() => window.open('https://www.quora.com/What-are-some-great-business-ideas-that-you-wouldnt-mind-giving-away-for-free')}>Entrepreneurship Ideas</a></li>
+          <li><a href="#" onClick={() => window.open('https://www.quora.com/What-are-some-low-cost-business-ideas-suitable-for-a-newbie-entrepreneur')}>Business Ideas</a></li>
+          <li><a href="#" onClick={() => window.open('https://www.quora.com/Which-content-is-trending-today-in-social-media')}>Trending on social media</a></li>
         </ul>
       </div>
       <ReactModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} className="modal" overlayClassName="overlay">

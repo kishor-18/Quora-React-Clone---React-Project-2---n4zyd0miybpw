@@ -1,9 +1,9 @@
+// AddPost.js
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import './Addpost.css';
 
 const AddPost = ({ isOpen, onRequestClose, postId, currentTitle, currentContent, currentImage, fetchPosts }) => {
-  const [isModalOpen, setIsModalOpen] = useState(isOpen);
   const [activeTab, setActiveTab] = useState('question');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -19,9 +19,7 @@ const AddPost = ({ isOpen, onRequestClose, postId, currentTitle, currentContent,
       setContent('');
       setImage(null);
     }
-  }, [postId, currentTitle, currentContent, currentImage, fetchPosts]);
-
-  
+  }, [postId, currentTitle, currentContent, currentImage]);
 
   const handleSubmit = async () => {
     const url = postId ? `https://academics.newtonschool.co/api/v1/quora/post/${postId}` : 'https://academics.newtonschool.co/api/v1/quora/post/';
@@ -46,7 +44,7 @@ const AddPost = ({ isOpen, onRequestClose, postId, currentTitle, currentContent,
 
       if (response.ok) {
         console.log('Post ' + (postId ? 'updated' : 'created') + ' successfully');
-        // fetchPosts(); 
+        fetchPosts();  
         onRequestClose();
       } else {
         const data = await response.json();

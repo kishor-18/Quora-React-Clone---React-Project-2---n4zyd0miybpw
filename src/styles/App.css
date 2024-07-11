@@ -12,7 +12,6 @@ body.dark-mode {
 
 .container {
   width: 100%;
-  min-width: 100%;
   display: grid;
   grid-template-areas:
       "navbar navbar navbar"
