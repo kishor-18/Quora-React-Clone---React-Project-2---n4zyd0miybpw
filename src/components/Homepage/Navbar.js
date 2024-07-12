@@ -3,6 +3,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import './Navbar.css';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import AddPost from './Addpost';
+import TryQuoraPlus from './TryQuoraPlus';  
 
 const Navbar = ({ user, setUser, onSearch }) => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Navbar = ({ user, setUser, onSearch }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isQuoraPlusModalOpen, setIsQuoraPlusModalOpen] = useState(false); // New state
   const [searchInput, setSearchInput] = useState('');
 
   const toggleDropdown = () => {
@@ -36,9 +38,10 @@ const Navbar = ({ user, setUser, onSearch }) => {
 
   const handleTryQuoraPlusClick = () => {
     if (!user.isLoggedIn) {
-      alert('Please log in to use try Quora+');     
+      alert('Please log in to try Quora+');
       return;
     }
+    setIsQuoraPlusModalOpen(true); // Open the modal
   };
 
   const handleAddQuestionClick = () => {
@@ -85,7 +88,7 @@ const Navbar = ({ user, setUser, onSearch }) => {
             </Link>
           </li>
           <li>
-            <Link to="/notifications" className={getNavLinkClass('/notifications')}>
+            <Link to="/" className={getNavLinkClass('/notifications')}>
               <i className="fa-solid fa-bell"></i>
             </Link>
           </li>
@@ -121,6 +124,7 @@ const Navbar = ({ user, setUser, onSearch }) => {
         <button className="add-question" onClick={handleAddQuestionClick}>Add question</button>
       </div>
       {isModalOpen && <AddPost isOpen={isModalOpen} onRequestClose={toggleModal} />}
+      {isQuoraPlusModalOpen && <TryQuoraPlus isOpen={isQuoraPlusModalOpen} onRequestClose={() => setIsQuoraPlusModalOpen(false)} />}
     </div>
   );
 };

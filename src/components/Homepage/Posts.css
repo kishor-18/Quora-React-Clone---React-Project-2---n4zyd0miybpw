@@ -45,8 +45,9 @@
 
 .edit-delete {
     display: flex;
-    justify-content: flex-end;
-    padding: 16px;
+    justify-content:flex-end;
+    /* padding: 16px; */
+    align-items: center;
     border-top: 1px solid #ddd;
   }
   
@@ -103,6 +104,15 @@
 .delete-button {
     cursor: pointer;
     background-color: red;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    color: rgb(244, 249, 252);
+}
+
+.answer-button {
+    cursor: pointer;
+    background-color: #0a3bdb;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 15px;

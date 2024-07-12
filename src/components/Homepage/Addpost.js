@@ -1,4 +1,3 @@
-// AddPost.js
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import './Addpost.css';
@@ -43,9 +42,10 @@ const AddPost = ({ isOpen, onRequestClose, postId, currentTitle, currentContent,
       });
 
       if (response.ok) {
+        const data = await response.json();
         console.log('Post ' + (postId ? 'updated' : 'created') + ' successfully');
-        fetchPosts();  
         onRequestClose();
+      fetchPosts(data);
       } else {
         const data = await response.json();
         console.error('Error:', data);

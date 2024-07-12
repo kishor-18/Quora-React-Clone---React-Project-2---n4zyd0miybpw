@@ -7,6 +7,7 @@ import Signup from './LoginPage/Signup';
 import Addpost from './Homepage/Addpost';
 import Answers from './AnswersPage/Answers';
 import Spaces from './SpacesPage/Spaces';
+import Following from './FollowingPage/Following';
 
 function App() {
   const [user, setUser] = useState({ isLoggedIn: false, email: '', firstName: '' });
@@ -21,6 +22,7 @@ function App() {
         <Route path="/addpost" element={<Addpost user={user} setUser={setUser} />} />
         <Route path="/answers" element={<Answers user={user} setUser={setUser} />} />
         <Route path="/spaces" element={<Spaces user={user} setUser={setUser} />} />
+        <Route path="/following" element={<Following user={user} setUser={setUser} />} />
       </Routes>
     </Router>
   );
